@@ -14,7 +14,7 @@ namespace API.Data.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     StartDateOfEmployment = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    EndDateOfEmployment = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    EndDateOfEmployment = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

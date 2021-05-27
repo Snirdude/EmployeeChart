@@ -19,22 +19,24 @@ namespace API.Controllers
             _context = context;
         }
 
-        public async Task<ActionResult<IEnumerable<Employee>>> GetAllEmployeesData()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<EmployeesPerMonthPerYearDto>>> GetAllEmployeesData()
         {
-            return await _context.Employees.ToListAsync();
+            return Ok(await DataHelper.GetEmployeesDataDtos(_context));
         }
 
         [HttpPost("generate")]
-        public async Task<ActionResult<IEnumerable<Employee>>> GenerateData(GenerateDataDto generateDataDto)
+        public async Task<ActionResult<IEnumerable<Employee>>> GenerateData(GenerateDataParams dataParams)
         {
-            await DataHelper.GenerateData(_context, generateDataDto.NumberOfEmployees);
+            await DataHelper.GenerateData(_context, dataParams.NumberOfEmployees);
             return Ok(_context.Employees.ToListAsync());
         }
 
-        [HttpDelete("delete-all")]
-        public async Task DeleteAllData()
+        [HttpDelete]
+        public async Task<ActionResult> DeleteAllData()
         {
             await DataHelper.DeleteEmployeesData(_context);
+            return Ok();
         }
     }
 }

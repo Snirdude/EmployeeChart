@@ -1,6 +1,6 @@
-namespace API.DTOs
+namespace API.Helpers
 {
-    public class GenerateDataDto
+    public class GenerateDataParams
     {
         public int NumberOfEmployees { get; set; }
     }

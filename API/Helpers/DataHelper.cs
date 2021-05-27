@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.DTOs;
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +30,7 @@ namespace API.Helpers
                 {
                     timeSpan = new DateTime(2021, 12, 31) - startDate;
                     newSpan = new TimeSpan(rnd.Next((int)timeSpan.TotalDays), 0, 0, 0);
-                    endDate = new DateTime(2018, 12, 31) + newSpan;
+                    endDate = startDate + newSpan;
                 }
 
                 employees.Add(new Employee { StartDateOfEmployment = startDate, EndDateOfEmployment = endDate });
@@ -43,6 +45,27 @@ namespace API.Helpers
             var employees = await context.Employees.ToListAsync();
             context.Employees.RemoveRange(employees);
             await context.SaveChangesAsync();
+        }
+
+        public async static Task<IEnumerable<EmployeesPerMonthPerYearDto>> GetEmployeesDataDtos(DataContext context)
+        {
+            List<EmployeesPerMonthPerYearDto> dtos = new List<EmployeesPerMonthPerYearDto>();
+            for (int i = 2019; i <= 2021; i++)
+            {
+                for (int j = 1; j <= 12; j++)
+                {
+                    EmployeesPerMonthPerYearDto dto = new EmployeesPerMonthPerYearDto();
+                    dto.Year = i;
+                    dto.Month = j;
+                    dto.Count = await context.Employees.Where(x => x.StartDateOfEmployment <= new DateTime(i, j, DateTime.DaysInMonth(i, j)) 
+                                                        && (x.EndDateOfEmployment == null || x.EndDateOfEmployment >= new DateTime(i, j, 1)))
+                                                        .CountAsync();
+                    
+                    dtos.Add(dto);
+                }
+            }
+
+            return dtos;
         }
     }
 }

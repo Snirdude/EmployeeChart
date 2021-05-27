@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210527093433_InitialCreate")]
+    [Migration("20210527132111_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("EndDateOfEmployment")
+                    b.Property<DateTime?>("EndDateOfEmployment")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("StartDateOfEmployment")
