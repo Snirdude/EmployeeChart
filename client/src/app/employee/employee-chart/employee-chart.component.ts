@@ -11,6 +11,10 @@ export class EmployeeChartComponent implements OnInit {
 
   readonly title = 'Employees Per Month Per Year';
   readonly type = 'ComboChart';
+  options = {
+    vAxis: {title: 'Number of Employees'},
+    hAxis: {title: 'Month'},
+  }
   data: any[][];
   columns: string[];
 
