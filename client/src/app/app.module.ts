@@ -1,17 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Injectable, NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EmployeeChartComponent } from './employee/employee-chart/employee-chart.component';
+import { EmployeeActionsComponent } from './employee/employee-actions/employee-actions.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EmployeeChartComponent,
+    EmployeeActionsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    GoogleChartsModule.forRoot(),//.forRoot({version: 'corechart'}),
+    NgbModule
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })
