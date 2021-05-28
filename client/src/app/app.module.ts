@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeChartComponent } from './employee/employee-chart/employee-chart.component';
 import { EmployeeActionsComponent } from './employee/employee-actions/employee-actions.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
     GoogleChartsModule.forRoot(),//.forRoot({version: 'corechart'}),
     NgbModule

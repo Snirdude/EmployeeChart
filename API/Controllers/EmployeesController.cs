@@ -26,17 +26,17 @@ namespace API.Controllers
         }
 
         [HttpPost("generate")]
-        public async Task<ActionResult<IEnumerable<Employee>>> GenerateData(GenerateDataParams dataParams)
+        public async Task<ActionResult<IEnumerable<EmployeesPerMonthPerYearDto>>> GenerateData(GenerateDataParams dataParams)
         {
             await DataHelper.GenerateData(_context, dataParams.NumberOfEmployees);
-            return Ok(_context.Employees.ToListAsync());
+            return Ok(await DataHelper.GetEmployeesDataDtos(_context));
         }
 
         [HttpDelete]
         public async Task<ActionResult> DeleteAllData()
         {
             await DataHelper.DeleteEmployeesData(_context);
-            return Ok();
+            return Ok(await DataHelper.GetEmployeesDataDtos(_context));
         }
     }
 }

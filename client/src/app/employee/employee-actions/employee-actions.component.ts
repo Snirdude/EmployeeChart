@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from 'src/app/_services/employee.service';
 
 @Component({
   selector: 'app-employee-actions',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeActionsComponent implements OnInit {
 
-  constructor() { }
+  numberOfEmployees: number;
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
   }
 
+  onGenerateDataClick(){
+    this.employeeService.generateChartData(this.numberOfEmployees);
+  }
+
+  onDeleteDataClick() {
+    this.employeeService.deleteChartData();
+  }
 }

@@ -42,8 +42,7 @@ namespace API.Helpers
 
         public async static Task DeleteEmployeesData(DataContext context)
         {
-            var employees = await context.Employees.ToListAsync();
-            context.Employees.RemoveRange(employees);
+            context.Employees.RemoveRange(context.Employees);
             await context.SaveChangesAsync();
         }
 

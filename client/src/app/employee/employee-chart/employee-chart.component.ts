@@ -45,7 +45,6 @@ export class EmployeeChartComponent implements OnInit {
       // Populate data
       for (let i = 0; i < 12; i++) {
         const employeesPerMonth = employeesPerMonthPerYear.filter(x => x.month === i + 1);
-        console.log(employeesPerMonth);
         for (let j = Math.min(...uniqueYears); j <= Math.max(...uniqueYears); j++) {
           this.data[i].push(employeesPerMonth.find(x => x.year === j).count);
         }
