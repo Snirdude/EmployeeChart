@@ -8,14 +8,25 @@ import { EmployeeService } from 'src/app/_services/employee.service';
 })
 export class EmployeeActionsComponent implements OnInit {
 
-  numberOfEmployees: number;
+  numberOfEmployees: number = 0;
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
   }
 
-  onGenerateDataClick(){
-    this.employeeService.generateChartData(this.numberOfEmployees);
+  onNumberOfEmployeesChange() {
+    if (this.numberOfEmployees > 100) {
+      this.numberOfEmployees = 100;
+    }
+    if (this.numberOfEmployees < 0) {
+      this.numberOfEmployees = 0;
+    }
+  }
+
+  onGenerateDataClick() {
+    if (this.numberOfEmployees > 0) {
+      this.employeeService.generateChartData(this.numberOfEmployees);
+    }
   }
 
   onDeleteDataClick() {
